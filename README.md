@@ -1,5 +1,7 @@
 
-# Supply and Demand Scheduler Demo Simulator Microservice
+# SDS Simulator Microservice
+
+Supply and Demand Scheduler Demo Simulator Microservice
 
 ## Run Locally
 
