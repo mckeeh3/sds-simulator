@@ -44,3 +44,15 @@ Output
 ~~~text
 [1]  + 1742830 exit 143   mvn exec:exec -DAPP_CONFIG=local1.conf &> /tmp/sds-simulator-service-1.log
 ~~~
+
+### Check for service readiness
+
+~~~bash
+curl http://localhost:9101/ready
+~~~
+
+Output
+
+~~~text
+OK
+~~~
