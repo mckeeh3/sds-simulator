@@ -1,8 +1,5 @@
 package sds.simulator;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
 import akka.actor.typed.Terminated;
@@ -22,6 +19,7 @@ class Main {
   public static void main(String[] args) {
     ActorSystem<?> actorSystem = ActorSystem.create(Main.create(), "sds-simulator-service");
     startClusterBootstrap(actorSystem);
+    startHttpServer(actorSystem);
   }
 
   private static void startClusterBootstrap(ActorSystem<?> actorSystem) {
@@ -30,12 +28,8 @@ class Main {
   }
 
   static void startHttpServer(ActorSystem<?> actorSystem) {
-    try {
-      final var host = InetAddress.getLocalHost().getHostName();
-      final var port = actorSystem.settings().config().getInt("woe.twin.http.server.port");
-      HttpServer.start(host, port, actorSystem);
-    } catch (UnknownHostException e) {
-      actorSystem.log().error("Http server start failure.", e);
-    }
+    final var host = actorSystem.settings().config().getString("sds-simulator-service.http.host");
+    final var port = actorSystem.settings().config().getInt("sds-simulator-service.http.port");
+    HttpServer.start(host, port, actorSystem);
   }
 }
