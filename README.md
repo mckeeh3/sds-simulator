@@ -7,6 +7,18 @@ Supply and Demand Scheduler Demo Simulator Microservice
 
 Run the microservice locally using the following steps.
 
+First, compile the code.
+
+~~~bash
+mvn compile
+~~~
+
+Or...
+
+~~~bash
+mvn clean package
+~~~
+
 ### Run in foreground
 
 mvn exec:exec -DAPP_CONFIG=local1.conf
