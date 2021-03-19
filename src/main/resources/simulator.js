@@ -245,24 +245,61 @@ function mouseClickedDemandCreate() {
   const radius = radiusOfSelectionMeters(mouseX, mouseY, mouseSelectionRadius());
   const diameter = radius * 2;
   console.log('Demand create, selection radius meters', radius, 'diameter', diameter);
+  mouseClickedPost('demand', 'create');
 }
 
 function mouseClickedDemandDelete() {
   const radius = radiusOfSelectionMeters(mouseX, mouseY, mouseSelectionRadius());
   const diameter = radius * 2;
   console.log('Demand delete, selection radius meters', radius, 'diameter', diameter);
+  mouseClickedPost('demand', 'delete');
 }
 
 function mouseClickedSupplyCreate() {
   const radius = radiusOfSelectionMeters(mouseX, mouseY, mouseSelectionRadius());
   const diameter = radius * 2;
   console.log('Supply create, selection radius meters', radius, 'diameter', diameter);
+  mouseClickedPost('supply', 'create');
 }
 
 function mouseClickedSupplyDelete() {
   const radius = radiusOfSelectionMeters(mouseX, mouseY, mouseSelectionRadius());
   const diameter = radius * 2;
   console.log('Supply delete, selection radius meters', radius, 'diameter', diameter);
+  mouseClickedPost('supply', 'delete');
+}
+
+function mouseClickedPost(what, action) {
+  httpPost(
+    location + 'selection',
+    'json',
+    {
+      what: what,
+      action: action,
+      location: locationOfClick()
+    },
+    function (response) {
+      console.log(response);
+    },
+    function (error) {
+      console.log(error);
+    }
+  );
+}
+
+function locationOfClick() {
+  const radius = mouseSelectionRadius();
+  const leftX = mouseX - radius;
+  const rightX = mouseX + radius;
+  const topY = mouseY - radius;
+  const botY = mouseY + radius;
+
+  return {
+    radius: radiusOfSelectionMeters(mouseX, mouseY, radius),
+    center: worldMap.pixelToLatLng(mouseX, mouseY),
+    topLeft: worldMap.pixelToLatLng(leftX, topY),
+    botRight: worldMap.pixelToLatLng(rightX, botY),
+  }
 }
 
 function mouseMoved() {

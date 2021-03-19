@@ -19,13 +19,13 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.binary.version>2.13</scala.binary.version>
-        <akka.version>2.6.12</akka.version>
-        <akka-http.version>10.2.2</akka-http.version>
-        <akka-management.version>1.0.9</akka-management.version>
-        <alpakka-kafka.version>2.0.6</alpakka-kafka.version>
+        <akka.version>2.6.13</akka.version>
+        <akka-http.version>10.2.4</akka-http.version>
+        <akka-management.version>1.0.10</akka-management.version>
         <akka-projection.version>1.1.0</akka-projection.version>
         <akka-persistence-jdbc.version>5.0.0</akka-persistence-jdbc.version>
         <akka-grpc.version>1.0.2</akka-grpc.version>
+        <alpakka-kafka.version>2.0.6</alpakka-kafka.version>
         <!-- needs to be defined to allow for overriding through mvn exec:exec -DAPP_CONFIG=local1.conf -->
         <APP_CONFIG>application.conf</APP_CONFIG>
         <!-- Version of the Docker image is derived from git commit.
@@ -123,6 +123,11 @@
             <groupId>com.lightbend.akka.grpc</groupId>
             <artifactId>akka-grpc-runtime_${scala.binary.version}</artifactId>
             <version>${akka-grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-http-jackson_2.12</artifactId>
+            <version>${akka-http.version}</version>
         </dependency>
 
         <dependency>

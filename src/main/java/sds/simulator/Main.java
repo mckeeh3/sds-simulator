@@ -30,6 +30,7 @@ class Main {
   static void startHttpServer(ActorSystem<?> actorSystem) {
     final var host = actorSystem.settings().config().getString("sds-simulator-service.http.host");
     final var port = actorSystem.settings().config().getInt("sds-simulator-service.http.port");
+
     HttpServer.start(host, port, actorSystem);
   }
 }

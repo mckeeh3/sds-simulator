@@ -12,7 +12,12 @@
         <appender-ref ref="STDOUT" />
     </appender>
 
-    <root level="INFO">
+    <logger name="akka.actor.TimerScheduler" level="INFO"/>
+    <logger name="akka.io" level="INFO"/>
+    <logger name="akka.http" level="INFO"/>
+    <logger name="akka.serialization" level="INFO"/>
+
+    <root level="DEBUG">
         <appender-ref ref="ASYNC"/>
     </root>
 
