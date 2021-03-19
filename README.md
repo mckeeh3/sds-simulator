@@ -21,11 +21,15 @@ mvn clean package
 
 ### Run in foreground
 
+~~~bash
 mvn exec:exec -DAPP_CONFIG=local1.conf
+~~~
 
 ### Run in background
 
+~~~bash
 mvn exec:exec -DAPP_CONFIG=local1.conf &> /tmp/sds-simulator-service-1.log &
+~~~
 
 ### Check for service readiness
 
