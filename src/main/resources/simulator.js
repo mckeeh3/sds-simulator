@@ -276,6 +276,8 @@ function mouseClickedPost(what, action) {
     {
       what: what,
       action: action,
+      amount: command.isDemand ? command.demand.amount.value : command.supply.amount.value,
+      rate: command.isDemand ? command.demand.rate.value : command.supply.rate.value,
       location: locationOfClick()
     },
     function (response) {

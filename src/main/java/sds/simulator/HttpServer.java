@@ -79,21 +79,28 @@ class HttpServer {
   public static class SelectionActionRequest implements CborSerializable {
     public final String what;
     public final String action;
+    public final int amount;
+    public final int rate;
     public final Location location;
 
     @JsonCreator
     public SelectionActionRequest(
       @JsonProperty("what") String what,
       @JsonProperty("action") String action,
+      @JsonProperty("amount") int amount,
+      @JsonProperty("rate") int rate,
       @JsonProperty("location") Location location) {
       this.what = what;
       this.action = action;
+      this.amount = amount;
+      this.rate = rate;
       this.location = location;
     }
 
     @Override
     public String toString() {
-      return String.format("%s[%s, %s, %s]", getClass().getSimpleName(), what, action, location);
+      return String.format("%s[%s, %s, amount %,d, rate %,d, %s]",
+        getClass().getSimpleName(), what, action, amount, rate, location);
     }
 
     public static class Location implements CborSerializable {
