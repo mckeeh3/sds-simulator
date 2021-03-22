@@ -123,7 +123,7 @@ class HttpServer {
 
       @Override
       public String toString() {
-        return String.format("%s[radius %1.9f, center %s, topLeft %s, botRight %s]",
+        return String.format("%s[radius %,1.9f, center %s, topLeft %s, botRight %s]",
           getClass().getSimpleName(), radius, center, topLeft, botRight);
       }
     }
