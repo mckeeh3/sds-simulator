@@ -1,0 +1,79 @@
+
+# Thanks to https://digitalis.io/blog/apache-cassandra/containerized-cassandra-cluster-for-local-testing/
+
+# Run cluster: docker-compose -f <this-filename> up -d
+
+# List containers: docker ps
+
+# Show cluster status: docker exec cassandra_node_1 nodetool status
+
+# Run DML & DQL commands: docker exec -it cassandra_node_1 cqlsh
+
+# Stop cluster: docker-compose -f <this-filename> down
+
+version: '2.4'
+networks:
+  cassandra:
+services:
+  cassandra_node_1:
+    image: cassandra:3.11.10
+    container_name: cassandra_node_1
+    hostname: cassandra_node_1
+    healthcheck:
+        test: ["CMD", "cqlsh", "-e", "describe keyspaces" ]
+        interval: 5s
+        timeout: 5s
+        retries: 60
+    networks:
+      - cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      - /tmp/data/cassandra_node_1:/var/lib/cassandra
+    environment: &environment
+        CASSANDRA_SEEDS: "cassandra_node_1,cassandra_node_2"
+        CASSANDRA_CLUSTER_NAME: SolarSystem
+        CASSANDRA_DC: Mars
+        CASSANDRA_RACK: West
+        CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+        CASSANDRA_NUM_TOKENS: 128
+
+  cassandra_node_2:
+    image: cassandra:3.11.10
+    container_name: cassandra_node_2
+    hostname: cassandra_node_2
+    healthcheck:
+        test: ["CMD", "cqlsh", "-e", "describe keyspaces" ]
+        interval: 5s
+        timeout: 5s
+        retries: 60
+    networks:
+      - cassandra
+    ports:
+      - "9043:9042"
+    volumes:
+      - /tmp/data/cassandra_node_2:/var/lib/cassandra
+    environment: *environment
+    depends_on:
+      cassandra_node_1:
+        condition: service_healthy
+
+  cassandra_node_3:
+    image: cassandra:3.11.10
+    container_name: cassandra_node_3
+    hostname: cassandra_node_3
+    healthcheck:
+        test: ["CMD", "cqlsh", "-e", "describe keyspaces" ]
+        interval: 5s
+        timeout: 5s
+        retries: 60
+    networks:
+      - cassandra
+    ports:
+      - "9044:9042"
+    volumes:
+      - /tmp/data/cassandra_node_3:/var/lib/cassandra
+    environment: *environment
+    depends_on:
+      cassandra_node_2:
+        condition: service_healthy
