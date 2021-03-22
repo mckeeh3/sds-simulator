@@ -1,7 +1,7 @@
 
 # Thanks to https://digitalis.io/blog/apache-cassandra/containerized-cassandra-cluster-for-local-testing/
 
-# Run cluster: docker-compose -f <this-filename> up -d
+# Run Cassandra cluster: docker-compose -f <this-filename> up -d
 
 # List containers: docker ps
 
