@@ -9,9 +9,9 @@
 
 # Run DML & DQL commands: docker exec -it cassandra_node_1 cqlsh
 
-# Stop cluster: docker-compose -f <this-filename> down
+# Stop cluster: docker-compose -f <this-filename> stop
 
-version: '2.4'
+version: '3.9'
 networks:
   cassandra:
 services:

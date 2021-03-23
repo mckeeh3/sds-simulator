@@ -1,0 +1,21 @@
+
+# Run PostgreSQL: docker-compose -f <this-filename> up -d
+
+# List containers: docker ps
+
+# Run DML & DQL commands:docker exec -it postgres-db psql -U shopping-cart
+
+# Stop PostgreSQL: docker-compose -f <this-filename> down
+
+version: '3.9'
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    hostname: postgres-db
+    ports:
+      - 5432:5432
+    environment:
+#      POSTGRES_DB: shopping-cart
+      POSTGRES_USER: shopping-cart
+      POSTGRES_PASSWORD: shopping-cart
