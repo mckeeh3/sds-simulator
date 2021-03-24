@@ -5,20 +5,20 @@
 
 # List containers: docker ps
 
-# Show cluster status: docker exec cassandra_node nodetool status
+# Show cluster status: docker exec cassandra-db nodetool status
 
-# Run DML & DQL commands: docker exec -it cassandra_node cqlsh
+# Run DML & DQL commands: docker exec -it cassandra-db cqlsh
 
 # Stop cluster: docker-compose -f <this-filename> down
 
-version: '2.4'
+version: '3.9'
 networks:
   cassandra:
 services:
-  cassandra_node:
+  cassandra-db:
     image: cassandra:3.11.10
-    container_name: cassandra_node
-    hostname: cassandra_node
+    container_name: cassandra-db
+    hostname: cassandra-db
     healthcheck:
         test: ["CMD", "cqlsh", "-e", "describe keyspaces" ]
         interval: 5s
@@ -29,7 +29,7 @@ services:
     ports:
       - "9042:9042"
     volumes:
-      - /tmp/data/cassandra_node:/var/lib/cassandra
+      - /tmp/data/cassandra-db:/var/lib/cassandra
     environment: &environment
         CASSANDRA_CLUSTER_NAME: SolarSystem
         CASSANDRA_DC: Mars
